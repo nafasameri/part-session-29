@@ -1,33 +1,43 @@
-class Role {
-    RoleID;
-    RoleName;
-    RoleDesc;
+class Music {
+    MusicID;
+    AlbumID;
+    ArtistID;
+    CategoryID;
+    MusicName;
+    MusicTitle;
+    MusicPoster;
+    MusicURL;
+    MusicDuration;
+    MusicLyrics;
+    MusicTags;
+    MusicArtists;
+    MusicReleaseTime;
+    Creator;
+    CreateTime;
+    Modifier;
+    ModifiTime;
+    IsDelete;
 
-    constructor(RoleID, RoleName, RoleDesc) {
-        this.RoleID = RoleID;
-        this.RoleName = RoleName;
-        this.RoleDesc = RoleDesc;
+    constructor(MusicID, AlbumID, ArtistID, CategoryID, MusicName, MusicTitle, MusicPoster, MusicURL, MusicDuration, MusicLyrics, MusicTags, MusicArtists, MusicReleaseTime, Creator, CreateTime, Modifier, ModifiTime, IsDelete) {
+        this.MusicID = MusicID;
+        this.AlbumID = AlbumID;
+        this.ArtistID = ArtistID;
+        this.CategoryID = CategoryID;
+        this.MusicName = MusicName;
+        this.MusicTitle = MusicTitle;
+        this.MusicPoster = MusicPoster;
+        this.MusicURL = MusicURL;
+        this.MusicDuration = MusicDuration;
+        this.MusicLyrics = MusicLyrics;
+        this.MusicTags = MusicTags;
+        this.MusicArtists = MusicArtists;
+        this.MusicReleaseTime = MusicReleaseTime;
+        this.Creator = Creator;
+        this.CreateTime = CreateTime;
+        this.Modifier = Modifier;
+        this.ModifiTime = ModifiTime;
+        this.IsDelete = IsDelete;
     }
-
-    // findAll(req, res) {
-    //     return new Promise((resolve, reject) => {
-    //         resolve(roles);
-    //     });
-    // }
-
-    // findById(id) {
-    //     return new Promise((resolve, reject) => {
-    //         const role = roles.find((r) => r.RoleID === id);
-    //         resolve(role);
-    //     });
-    // }
-
-    // add(role) {
-    //     return new Promise((resolve, reject) => {
-    //         roles.push(role);
-    //         resolve(role ?.RoleID);
-    //     });
-    // }
 }
 
-module.exports = Role;
+module.exports = Music;

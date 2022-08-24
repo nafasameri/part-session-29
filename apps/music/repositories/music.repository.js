@@ -1,47 +1,19 @@
-const Role = require("../models/role.model");
-const rolesDataStore = require("./roles.json");
+const Music = require("../models/music.model");
+const musicsDataStore = require("./music.json");
 
-class RoleRepository {
+class MusicRepository {
     async fetchAll() {
-        const roles = [];
-        for (let role of rolesDataStore) {
-            let roleModel = new Role(
-                role.RoleID,
-                role.RoleName,
-                role.RoleDesc
+        const musics = [];
+        for (let music of musicsDataStore) {
+            let musicModel = new Music(
+                music.RoleID,
+                music.RoleName,
+                music.RoleDesc
             );
-            roles.push(roleModel);
+            musics.push(musicModel);
         }
-        return roles;
-    }
-
-    async fetchRole(id) {
-        for (let role of rolesDataStore) {
-            if (role.RoleID == id) {
-                let roleModel = new Role(
-                    role.RoleID,
-                    role.RoleName,
-                    role.RoleDesc
-                );
-                return roleModel;
-            }
-        }
-        return null;
-    }
-
-    async add(id) {
-        for (let role of rolesDataStore) {
-            if (role.RoleID == id) {
-                let roleModel = new Role(
-                    role.RoleID,
-                    role.RoleName,
-                    role.RoleDesc
-                );
-                return roleModel;
-            }
-        }
-        return null;
+        return musics;
     }
 }
 
-module.exports = RoleRepository;
+module.exports = MusicRepository;

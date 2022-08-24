@@ -1,25 +1,13 @@
-const roleController = require("./controllers/role.controller");
+const musicController = require("./controllers/music.controller");
 const { fetchQueryStringFromURL, getPostData, getHeaders } = require('./middlewares');
 
 const routes = [
   {
-    url: "role",
-    method: "GET",
-    controller: roleController.getAllRoles,
-    middlewares: [fetchQueryStringFromURL, getHeaders],
-  },
-  {
-    url: "role",
+    url: "upload",
     method: "POST",
-    controller: roleController.createRole,
+    controller: musicController.upload,
     middlewares: [fetchQueryStringFromURL, getHeaders],
   },
-  {
-    url: "role",
-    method: "PUT",
-    controller: roleController.createRole,
-    middlewares: [fetchQueryStringFromURL, getHeaders],
-  }
 ];
 
 module.exports = routes;

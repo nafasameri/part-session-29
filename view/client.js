@@ -7,8 +7,8 @@ const querystring = require('querystring');
 const options = {
     hostname: config.serverConfig.hostname,
     port: config.serverConfig.port,
-    path: '/roles/role?id=2',
-    method: 'POSgit T',
+    path: '/music/upload',
+    method: 'POST',
     headers: {
         'Content-Type': 'multipart/form-data'
     }
