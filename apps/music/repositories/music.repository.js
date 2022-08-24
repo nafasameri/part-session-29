@@ -5,11 +5,7 @@ class MusicRepository {
     async fetchAll() {
         const musics = [];
         for (let music of musicsDataStore) {
-            let musicModel = new Music(
-                music.RoleID,
-                music.RoleName,
-                music.RoleDesc
-            );
+            let musicModel = new Music(1, 'test');
             musics.push(musicModel);
         }
         return musics;

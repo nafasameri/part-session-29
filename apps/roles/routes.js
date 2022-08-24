@@ -17,7 +17,7 @@ const routes = [
   {
     url: "role",
     method: "PUT",
-    controller: roleController.createRole,
+    controller: roleController.updateRole,
     middlewares: [fetchQueryStringFromURL, getHeaders],
   }
 ];

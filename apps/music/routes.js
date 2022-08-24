@@ -6,7 +6,7 @@ const routes = [
     url: "upload",
     method: "POST",
     controller: musicController.upload,
-    middlewares: [fetchQueryStringFromURL, getHeaders],
+    middlewares: [fetchQueryStringFromURL],
   },
 ];
 

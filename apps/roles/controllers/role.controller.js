@@ -36,6 +36,14 @@ const createRole = async (req, res, data) => {
     }
 };
 
+const updateRole = async (req, res, data) => {
+    try {
+    } catch (error) {
+        logger.error(error);
+        throw error;
+    }
+};
+
 // async function getRoles(req, res) {
 //     try {
 //         const id = req.params ?.id;
@@ -68,5 +76,6 @@ const createRole = async (req, res, data) => {
 
 module.exports = {
     getAllRoles,
-    createRole
+    createRole,
+    updateRole
 };
