@@ -10,11 +10,11 @@ const getAllRoles = async (req, res) => {
         const id = req.querystring ?.id;
         if (id) {
             const role = await roleRepository.fetchRole(id);
-            sendResponse(res, 200, { "Content-Type": "application/json" }, role);
+            sendResponse(res, 200, { "Content-Type": "application/json" }, JSON.stringify(role, null, 2));
         }
         else {
             const roles = await roleRepository.fetchAll();
-            sendResponse(res, 200, { "Content-Type": "application/json" }, roles);
+            sendResponse(res, 200, { "Content-Type": "application/json" }, JSON.stringify(roles, null, 2));
         }
     } catch (error) {
         logger.error(error);
@@ -26,9 +26,9 @@ const createRole = async (req, res, data) => {
     try {
         const productId = await roleRepository.add(data);
         if (!productId) {
-            sendResponse(res, 404, { "Content-Type": "application/json" }, { message: 'Could Not Create' });
+            sendResponse(res, 404, { "Content-Type": "application/json" }, JSON.stringify({ message: 'Could Not Create' }, null, 2));
         } else {
-            sendResponse(res, 200, { "Content-Type": "application/json" }, productId);
+            sendResponse(res, 200, { "Content-Type": "application/json" }, JSON.stringify({ productId: productId }));
         }
     } catch (error) {
         logger.error(error);

@@ -3,10 +3,16 @@ const { fetchQueryStringFromURL, getPostData, getHeaders } = require('./middlewa
 
 const routes = [
   {
+    url: "",
+    method: "GET",
+    controller: musicController.root,
+    middlewares: [fetchQueryStringFromURL, getHeaders],
+  },
+  {
     url: "upload",
     method: "POST",
     controller: musicController.upload,
-    middlewares: [fetchQueryStringFromURL],
+    middlewares: [fetchQueryStringFromURL, getHeaders],
   },
 ];
 

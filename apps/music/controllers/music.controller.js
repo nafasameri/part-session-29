@@ -1,5 +1,6 @@
 const MusicRepository = require("../repositories/music.repository");
 const sendResponse = require('../../../modules/handler/response.handler');
+const { date } = require('../../../modules/utility');
 const logger = require('log4js').getLogger();
 const formidable = require('formidable')
 // const musicRepository = new MusicRepository();
@@ -8,36 +9,57 @@ logger.level = 'debug';
 
 const upload = async (req, res) => {
     try {
-        const form = formidable({ multiples: true });
-        console.warn(form);
-        
-        form.parse(req, (err, fields, files) => {
-            console.error(err);
-            sendResponse(res, 200, null, `
-            <h2>With Node.js <code>"http"</code> module</h2>
-            <form action="/api/upload" enctype="multipart/form-data" method="post">
-              <div>Text field title: <input type="text" name="title" /></div>
-              <div>File: <input type="file" name="multipleFiles" multiple="multiple" /></div>
-              <input type="submit" value="Upload" />
-            </form>
-            <form action="/api/upload" enctype="multipart/form-data" method="post">
-              <div>Text field title: <input type="text" name="title" /></div>
-              <div>Text field with same name: <input type="text" name="title" /></div>
-              <div>Other field <input type="text" name="other" /></div>
-              <input type="submit" value="submit simple" />
-            </form>
-          `);
-            // if (err)
-                // return sendResponse(res, err.httpCode || 400, { 'Content-Type': 'text/plain' }, String(err));
-            // sendResponse(res, 200, { 'Content-Type': 'application/json' }, JSON.stringify({ fields, files }, null, 2));
+        const form = formidable({
+            uploadDir: `uploads`,
+            keepExtensions: true,
+            filename(name, ext, part, form) {
+                // return `${slugify(name)}.${slugify(ext, { separator: '' })}`.substr(0, 100);
+                return date() + ' ' + name + ext;
+            },
+            // filter: function ({name, originalFilename, mimetype}) {
+            //   // keep only images
+            //   return mimetype && mimetype.includes("image");
+            // }
+            // maxTotalFileSize: 4000,
+            // maxFileSize: 1000,
+
         });
+
+        form.parse(req, (error, fields, files) => {
+            req.fields = fields;
+            req.files = files;
+
+            if (error) {
+                logger.error(error);
+                sendResponse(res, error.httpCode || 400, { 'Content-Type': 'text/plain' }, `${error}`);
+                return;
+            }
+            sendResponse(res, 200, { 'Content-Type': 'application/json' }, JSON.stringify({ fields, files }, null, 2));
+        });
+
+        return;
     } catch (error) {
         logger.error(error);
         throw error;
     }
 };
 
+const root = async (req, res) => {
+    // else show a file upload form
+    res.writeHead(200, { 'Content-Type': 'text/html' });
+    res.write(`<html><body>
+      <h2>With Node.js <code>"http"</code> module</h2>
+      <form action="/music/upload" enctype="multipart/form-data" method="post">
+        <div>Text field title: <input type="text" name="title" /></div>
+        <div>File: <input type="file" name="multipleFiles" multiple="multiple" /></div>
+        <input type="submit" value="Upload" />
+      </form>
+      </body></html>`);
+    res.end();
+}
+
 
 module.exports = {
-    upload
+    upload,
+    root
 };

@@ -1,4 +1,7 @@
 const sendResponse = require('../handler/response.handler');
+const logger = require('log4js').getLogger();
+logger.level = 'debug';
+
 
 function fetchQueryStringFromURL(req, res, next) {
   try {
@@ -14,7 +17,7 @@ function fetchQueryStringFromURL(req, res, next) {
       });
     }
     req.querystring = result;
-    console.log('querystring: ' + JSON.stringify(req.querystring));
+    logger.warn('querystring: ' + JSON.stringify(req.querystring));
     return req;
   } catch (e) {
     sendResponse(res, 500, { "Content-Type": "application/json" },
@@ -66,15 +69,15 @@ async function getHeaders(req, res, next) {
       switch (contentType) {
         case 'application/x-www-form-urlencoded':
           req.params = data;
-          console.log('params: ' + req.params);
+          logger.warn('params: ' + req.params);
           break;
         case 'application/json':
           req.body = data;
-          console.log('body: ' + req.body);
+          logger.warn('body: ' + req.body);
           break;
       }
-      return req;
     });
+    return req;
   } catch (e) {
     sendResponse(res, 500, { "Content-Type": "application/json" },
       JSON.stringify({
